@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `ramon.dev`,
+    position: `Fullstack Developer`,
     description: `Blog produced by Ramon Xavier, a Fullstack Developer`,
     author: `@ramonxm`,
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
