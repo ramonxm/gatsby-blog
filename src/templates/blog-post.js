@@ -5,8 +5,15 @@ import Layout from '../components/Layout'
 import Seo from '../components/seo'
 import * as S from '../components/Post/styles'
 
-const BlogPost = ({ data }) => {
+import RecommendedPosts from "../components/RecommendedPost"
+import Comments from "../components/Comments"
+
+
+const BlogPost = ({ data, pageContext }) => {
   const post = data.markdownRemark
+
+  const next = pageContext.nextPost
+  const previous = pageContext.previousPost
 
   return (
     <Layout>
@@ -25,6 +32,8 @@ const BlogPost = ({ data }) => {
       <S.MainContent>
         <div dangerouslySetInnerHTML={{ __html: post.html }}></div>
       </S.MainContent>
+      <RecommendedPosts next={next} previous={previous} />
+      <Comments url={post.fields.slug} title={post.frontmatter.title} />
     </Layout>
   )
 }
@@ -32,6 +41,9 @@ const BlogPost = ({ data }) => {
 export const query = graphql`
   query Post($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
+      fields {
+        slug
+      }
       frontmatter {
         title
         description
